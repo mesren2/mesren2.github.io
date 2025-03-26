@@ -1,9 +1,13 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme-provider";
+import { Button } from "@/components/ui/button";
+import { Sun, Moon } from "lucide-react";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,11 +39,21 @@ const NavBar = () => {
         >
           mesren2
         </a>
-        <nav className="hidden md:flex space-x-8">
-          <a href="#about" className="text-sm font-medium hover:text-accent transition-colors">About</a>
-          <a href="#projects" className="text-sm font-medium hover:text-accent transition-colors">Projects</a>
-          <a href="https://github.com/mesren2" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-accent transition-colors">GitHub</a>
-        </nav>
+        <div className="flex items-center space-x-8">
+          <nav className="hidden md:flex space-x-8">
+            <a href="#about" className="text-sm font-medium hover:text-accent transition-colors">About</a>
+            <a href="#projects" className="text-sm font-medium hover:text-accent transition-colors">Projects</a>
+            <a href="https://github.com/mesren2" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-accent transition-colors">GitHub</a>
+          </nav>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="rounded-full"
+          >
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
     </header>
   );
