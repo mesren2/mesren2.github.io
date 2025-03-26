@@ -1,10 +1,13 @@
 
 import { useEffect } from "react";
+import { Github } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 type Project = {
   title: string;
   description: string;
   tags: string[];
+  github?: string;
   image?: string;
 };
 
@@ -13,16 +16,25 @@ const projects: Project[] = [
     title: "BendersMC",
     description: "Minecraft server development and custom plugins",
     tags: ["Java", "Minecraft", "Game Development"],
+    github: null, // No GitHub repository
   },
   {
     title: "Team Soulfire",
     description: "Collaborative game development projects",
-    tags: ["Unity", "C#", "Game Design"],
+    tags: ["Java", "Minecraft", "Game Development"],
+    github: "https://github.com/TeamSoulfire",
   },
   {
     title: "Portfolio Website",
     description: "Personal portfolio showcasing projects and skills",
     tags: ["React", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/mesren2/portfolio",
+  },
+  {
+    title: "Starborne",
+    description: "Sci-Fi space exploration game",
+    tags: ["Unity", "C#", "Sci-Fi", "Game Design"],
+    github: "https://github.com/mesren2/starborne",
   },
 ];
 
@@ -64,13 +76,26 @@ const Projects = () => {
                         flex flex-col h-full reveal ${`reveal-delay-${index % 3 + 1}`}`}
             >
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-xl font-semibold">{project.title}</h3>
+                  {project.github !== undefined && (
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={`text-muted-foreground hover:text-accent transition-colors ${project.github === null ? 'pointer-events-none line-through opacity-50' : ''}`}
+                      aria-label={project.github === null ? `${project.title} (No GitHub repository)` : `${project.title} GitHub repository`}
+                    >
+                      <Github size={20} />
+                    </a>
+                  )}
+                </div>
                 <p className="text-muted-foreground mb-4 flex-1">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-secondary rounded-full text-xs font-medium">
+                    <Badge key={tag} variant="secondary" className="font-medium">
                       {tag}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>

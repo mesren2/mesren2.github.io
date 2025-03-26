@@ -1,8 +1,11 @@
 
 import { Github } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
+import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
   
   return (
     <footer className="bg-secondary/50 py-12 px-6">
@@ -24,6 +27,22 @@ const Footer = () => {
             >
               <Github size={20} />
             </a>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => {
+                const html = document.documentElement;
+                const currentTheme = theme;
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                html.classList.remove(currentTheme);
+                html.classList.add(newTheme);
+                localStorage.setItem("theme", newTheme);
+                window.dispatchEvent(new Event("theme-change"));
+              }}
+              className="text-xs"
+            >
+              {theme === "dark" ? "Light" : "Dark"} mode
+            </Button>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
+import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   useEffect(() => {
@@ -45,6 +46,9 @@ const Index = () => {
 
   return (
     <div id="top" className="min-h-screen flex flex-col">
+      <div className="fixed top-4 right-4 z-50">
+        <Badge className="bg-orange-500 hover:bg-orange-600 text-white">In development</Badge>
+      </div>
       <NavBar />
       <main className="flex-1">
         <Hero />
