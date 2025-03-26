@@ -1,7 +1,9 @@
+
 import { useEffect } from "react";
 import { Github, Info } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 type Project = {
   title: string;
@@ -9,6 +11,7 @@ type Project = {
   tags: string[];
   github?: string | null;
   inDevelopment?: boolean;
+  about?: string | null;
 };
 
 const projects: Project[] = [
@@ -17,17 +20,21 @@ const projects: Project[] = [
     description: "Minecraft server development and custom plugins",
     tags: ["Java", "Minecraft", "Game Development"],
     github: null,
+    about: "https://discord.gg/bendersmc",
   },
   {
     title: "Team Soulfire",
     description: "Collaborative game development projects",
     tags: ["Java", "Minecraft", "Game Development"],
+    github: null,
+    about: null,
   },
   {
     title: "Portfolio Website",
     description: "Personal portfolio showcasing projects and skills",
     tags: ["React", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/mesren2/portfolio",
+    about: null,
   },
   {
     title: "Starborne",
@@ -35,6 +42,7 @@ const projects: Project[] = [
     tags: ["Unity", "C#", "Sci-Fi", "Game Design"],
     github: "https://github.com/mesren2/starborne",
     inDevelopment: true,
+    about: "/starborne",
   },
 ];
 
@@ -89,33 +97,82 @@ const Projects = () => {
                       </Badge>
                     ))}
                   </div>
-                  <div className="flex justify-end items-center gap-2">
-                    {project.inDevelopment && (
-                      <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
-                        In development
-                      </Badge>
-                    )}
-                    {project.title === "Team Soulfire" ? (
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="rounded-full"
-                      >
-                        <Info className="h-4 w-4" />
-                      </Button>
-                    ) : (
-                      project.github !== undefined && (
+                  <div className="flex justify-between items-center">
+                    {/* In development tag - bottom left */}
+                    <div>
+                      {project.inDevelopment && (
+                        <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
+                          In development
+                        </Badge>
+                      )}
+                    </div>
+                    
+                    {/* Buttons - bottom right */}
+                    <div className="flex items-center gap-2">
+                      {/* About button */}
+                      {project.about ? (
+                        project.title === "Starborne" ? (
+                          <Link to={project.about}>
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              className="rounded-full"
+                            >
+                              <Info className="h-4 w-4" />
+                            </Button>
+                          </Link>
+                        ) : (
+                          <a 
+                            href={project.about} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              className="rounded-full"
+                            >
+                              <Info className="h-4 w-4" />
+                            </Button>
+                          </a>
+                        )
+                      ) : (
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          className="rounded-full opacity-50 pointer-events-none"
+                          disabled
+                        >
+                          <Info className="h-4 w-4" />
+                        </Button>
+                      )}
+                      
+                      {/* GitHub button */}
+                      {project.github ? (
                         <a 
                           href={project.github} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className={`text-muted-foreground hover:text-accent transition-colors ${project.github === null ? 'pointer-events-none line-through opacity-50' : ''}`}
-                          aria-label={project.github === null ? `${project.title} (No GitHub repository)` : `${project.title} GitHub repository`}
+                        >
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            className="rounded-full"
+                          >
+                            <Github className="h-4 w-4" />
+                          </Button>
+                        </a>
+                      ) : (
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          className="rounded-full opacity-50 pointer-events-none"
+                          disabled
                         >
                           <Github className="h-4 w-4" />
-                        </a>
-                      )
-                    )}
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
