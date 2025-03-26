@@ -148,7 +148,7 @@ const Projects = () => {
                       )}
                       
                       {/* GitHub button */}
-                      {project.github ? (
+                      {project.github && project.title !== "Starborne" ? (
                         <a 
                           href={project.github} 
                           target="_blank" 
