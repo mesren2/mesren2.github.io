@@ -33,7 +33,7 @@ const projects: Project[] = [
     title: "Portfolio Website",
     description: "Personal portfolio showcasing projects and skills",
     tags: ["React", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/mesren2/portfolio",
+    github: "https://github.com/mesren2/mesren2.github.io",
     about: null,
   },
   {
