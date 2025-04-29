@@ -44,6 +44,7 @@ const NavBar = () => {
             <a href="#about" className="text-sm font-medium hover:text-accent transition-colors">About</a>
             <a href="#projects" className="text-sm font-medium hover:text-accent transition-colors">Projects</a>
             <a href="https://github.com/mesren2" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-accent transition-colors">GitHub</a>
+            <a href="https://mesren2.is-a.dev/blog/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-accent transition-colors">Blog</a>
           </nav>
           <Button
             variant="ghost"
